@@ -45,19 +45,20 @@ def send_diagnostics(access_token):
         raise Exception('Failed to send diagnostics')
 
 def main():
-    try:
+   try:
         access_token = login()
+        username = input("Enter the username of the user whose endpoint needs to be reset: ")
         endpoint_status = check_endpoint_status(access_token)
         
         if endpoint_status == 'connected':
             print('Endpoint is connected. Resetting...')
-            reset_endpoint(access_token)
+            reset_endpoint(access_token, username)
             send_diagnostics(access_token)
             print('Endpoint reset and diagnostics sent successfully.')
         else:
             print('Endpoint is not connected.')
     except Exception as e:
         print('An error occurred:', str(e))
-
+        
 if __name__ == "__main__":
     main()
